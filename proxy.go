@@ -36,7 +36,6 @@ type Listener struct {
 func NewListener(network string, addr string, handler Handler) *Listener {
 	listener, err := net.Listen(network, addr)
 	if err != nil {
-		//log.Err(err).Msgf("[listener] %s %s: listen failed: %s", network, addr)
 		log.Printf("[listener] %s %s: listen failed: %s", network, addr, err)
 	}
 	return &Listener{
@@ -58,7 +57,6 @@ func (s *Listener) Serve() {
 			default:
 				conn, err := s.listener.Accept()
 				if err != nil {
-					//log.Err(err).Msgf("[listener] %s %s: bad request", s.network, s.addr)
 					log.Printf("[listener] %s %s: bad request", s.network, s.addr)
 					continue
 				}
@@ -67,7 +65,7 @@ func (s *Listener) Serve() {
 				}()
 			}
 		}
-		//log.Info().Msgf("[listener] %s %s: stoped", s.network, s.addr)
+
 		log.Printf("[listener] %s %s: stoped", s.network, s.addr)
 	}()
 }
